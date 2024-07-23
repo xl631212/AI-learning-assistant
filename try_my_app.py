@@ -18,7 +18,7 @@ import nltk
 import os
 
 os.environ["OPENAI_API_KEY"]= st.secrets["OPENAI_API_KEY"]
-openai.api_key = os.environ["OPENAI_API_KEY"]
+api_key = os.environ["OPENAI_API_KEY"]
 
 @st.cache_data
 def download_nltk():
@@ -410,7 +410,6 @@ def app():
 
             #initialize app
             temp_file_paths = initialize_file(added_files)
-            api_key = openai.api_key
             st.session_state["OPENAI_API_KEY"] = api_key
             client = OpenAI(api_key = st.session_state["OPENAI_API_KEY"])
             st.session_state.embeddings_df, st.session_state.faiss_index = initialize_vdb(temp_file_paths)
