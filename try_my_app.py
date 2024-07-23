@@ -16,6 +16,9 @@ from collections import Counter
 #import jieba.analyse
 import nltk
 
+os.environ["OPENAI_API_KEY"]= st.secrets["OPENAI_API_KEY"]
+openai.api_key = os.environ["OPENAI_API_KEY"]
+
 @st.cache_data
 def download_nltk():
     nltk.download('punkt')
@@ -396,6 +399,7 @@ def app():
         )
     
     if btn:
+        api_key = openai.api_key
         if api_key != "sk-..." and api_key !="" and api_key.startswith("sk-"):
             st.session_state.start_col1.empty()
             st.session_state.start_col2.empty()
@@ -405,6 +409,7 @@ def app():
 
             #initialize app
             temp_file_paths = initialize_file(added_files)
+            api_key = openai.api_key
             st.session_state["OPENAI_API_KEY"] = api_key
             client = OpenAI(api_key = st.session_state["OPENAI_API_KEY"])
             st.session_state.embeddings_df, st.session_state.faiss_index = initialize_vdb(temp_file_paths)
