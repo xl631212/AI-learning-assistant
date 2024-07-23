@@ -388,11 +388,10 @@ def app():
         
         ### 🏃‍♂️ Get started!
                                                     
-        1. **Input Your OpenAI API Key**: <font color = 'grey'>Give OmniTutor your own OpenAI API key (On top of the **sidebar**) to get started.</font>
-        2. **Upload learning materials**: <font color = 'grey'>The upload widget in the sidebar supports PDF and .md files simutaenously.</font>
-        3. **Customize your course**: <font color = 'grey'>By few clicks and swipes, adjusting teaching style, lesson count and language for your course.</font>
-        4. **Start course generating**: <font color = 'grey'>Touch "Generate my course!" button in the sidebar, then watch how OmniTutor creates personal-customized course for you.</font>
-        5. **Interactive learning**: <font color = 'grey'>Learn the course, and ask OmniTutor any questions related to this course whenever you encountered them.</font>
+        1. **Upload learning materials**: <font color = 'grey'>The upload widget in the sidebar supports PDF and .md files simutaenously.</font>
+        2. **Customize your course**: <font color = 'grey'>By few clicks and swipes, adjusting teaching style, lesson count and language for your course.</font>
+        3. **Start course generating**: <font color = 'grey'>Touch "Generate my course!" button in the sidebar, then watch how OmniTutor creates personal-customized course for you.</font>
+        4. **Interactive learning**: <font color = 'grey'>Learn the course, and ask OmniTutor any questions related to this course whenever you encountered them.</font>
                                 
         🎉 Have fun Learning!
                                                                                                                                        
