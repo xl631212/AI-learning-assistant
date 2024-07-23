@@ -15,10 +15,6 @@ from collections import Counter
 #import jieba
 #import jieba.analyse
 import nltk
-import os
-
-os.environ["OPENAI_API_KEY"]= st.secrets["OPENAI_API_KEY"]
-api_key = os.environ["OPENAI_API_KEY"]
 
 @st.cache_data
 def download_nltk():
@@ -27,7 +23,7 @@ def download_nltk():
     nltk.download('stopwords')
 
 def chunkstring(string, length):
-        return (string[0+i:length+i] for i in range(0, len(string), length))
+    return (string[0+i:length+i] for i in range(0, len(string), length))
 
 def pdf_parser(input_pdf):
     pdf = PdfReader(input_pdf)
@@ -67,7 +63,7 @@ def get_keywords(file_paths): #这里的重点是，对每一个file做尽可能
     return keywords_list
 
 
-def get_completion_from_messages(client, messages, model="gpt-4o-mini", temperature=0):
+def get_completion_from_messages(client, messages, model="gpt-4-1106-preview", temperature=0):
     client = client
     completion = client.chat.completions.create(
         model=model,
@@ -127,7 +123,7 @@ def constructVDB(file_paths):
     chunk_df = pd.DataFrame(chunks, columns=['chunk'])
 
     #从文本chunks到embeddings
-    model = SentenceTransformer('paraphrase-mpnet-base-v2', device='cuda')
+    model = SentenceTransformer('paraphrase-mpnet-base-v2')
     embeddings = model.encode(chunk_df['chunk'].tolist())
     # convert embeddings to a dataframe
     embedding_df = pd.DataFrame(embeddings.tolist())
@@ -307,6 +303,9 @@ def add_prompt_course_style(selected_style_list):
 
 def app():
     st.title("AI Learning assistant v0.1.0")
+    announce = st.caption('''
+    
+    ''')
     divider = st.divider()
     st.markdown("""
         <style>
@@ -323,7 +322,7 @@ def app():
         </style>
     """, unsafe_allow_html=True)
     with st.sidebar:
-        api_key = ''
+        api_key = st.secrets["OPENAI_API_KEY"]
         st.image("simpsons.png")
         added_files = st.file_uploader('Upload .md or .pdf files, simultaneous mixed upload these types is supported.', type=['.md','.pdf'], accept_multiple_files=True)
         with st.expander('Customize my course'):
@@ -376,7 +375,6 @@ def app():
         st.session_state.description = st.markdown('''
         <font color = 'grey'> An all-round teacher. A teaching assistant who really knows the subject. **Anything. Anywhere. All at once.** </font> :100:
         
-
         ### ✨ Key features                                           
                                                    
         - 🧑‍🏫 **Concise and clear course creation**: <font color = 'grey'>Generated from your learning notes (**.md**) or any learning materials (**.pdf**)!</font>
@@ -397,17 +395,17 @@ def app():
         )
     
     if btn:
-        # api_key = os.environ["OPENAI_API_KEY"]
         if api_key != "sk-..." and api_key !="" and api_key.startswith("sk-"):
             st.session_state.start_col1.empty()
             st.session_state.start_col2.empty()
             st.session_state.description.empty()
             st.session_state.case_pay.empty()
+            announce.empty()
             divider.empty()
 
             #initialize app
             temp_file_paths = initialize_file(added_files)
-            st.session_state["OPENAI_API_KEY"] = api_key
+            st.session_state["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
             client = OpenAI(api_key = st.session_state["OPENAI_API_KEY"])
             st.session_state.embeddings_df, st.session_state.faiss_index = initialize_vdb(temp_file_paths)
             st.session_state.course_outline_list = initialize_outline(client, temp_file_paths, num_lessons, language)
@@ -417,7 +415,6 @@ def app():
                         > 🤔 <font color = 'grey'> **Not satisfied with this course?** Simply click "Generate my course!" button to regenerate a new one! </font>
                         >
                         > 😁 <font color = 'grey'> If the course is good enough for you, learn and enter questions related in the input box below 👇... </font>
-
                         :blue[Wish you all the best in your learning journey :)]
                         ''', unsafe_allow_html=True)
         else:
@@ -425,7 +422,9 @@ def app():
             st.session_state.start_col2.empty()
             st.session_state.description.empty()
             st.session_state.case_pay.empty()
+            announce.empty()
             divider.empty()
+            warning = st.write("请输入正确的OpenAI API Key令牌")
                     
 
     col1, col2 = st.columns([0.6,0.4])
@@ -436,12 +435,11 @@ def app():
         st.session_state.start_col2.empty()
         st.session_state.description.empty()
         st.session_state.case_pay.empty()
+        announce.empty()
         divider.empty()
         
         with col1:
-            #把课程大纲打印出来
             regenerate_outline(st.session_state.course_outline_list)
-            #把课程内容打印出来
             regenerate_content(st.session_state.course_content_list)
 
         with col2:
