@@ -1,3 +1,47 @@
+Hugging Face's logo
+Hugging Face
+Search models, datasets, users...
+Models
+Datasets
+Spaces
+Posts
+Docs
+Pricing
+
+
+
+Spaces:
+
+xuyingliKepler
+/
+AI_learning_assistant
+
+private
+
+App
+Files
+Community
+Settings
+AI_learning_assistant
+/
+app.py
+
+xuyingliKepler's picture
+xuyingliKepler
+Update app.py
+c99ea3f
+VERIFIED
+5 minutes ago
+raw
+
+Copy download link
+history
+blame
+edit
+delete
+No virus
+
+23.6 kB
 import pandas as pd
 import numpy as np
 import faiss
@@ -323,7 +367,7 @@ def app():
     """, unsafe_allow_html=True)
     with st.sidebar:
         api_key = st.secrets["OPENAI_API_KEY"]
-        st.image("simpsons.png")
+        st.image("https://siyuan-harry.oss-cn-beijing.aliyuncs.com/oss://siyuan-harry/20231021212525.png")
         added_files = st.file_uploader('Upload .md or .pdf files, simultaneous mixed upload these types is supported.', type=['.md','.pdf'], accept_multiple_files=True)
         with st.expander('Customize my course'):
             num_lessons = st.slider('How many lessons do you want this course to have?', min_value=2, max_value=15, value=5, step=1)
