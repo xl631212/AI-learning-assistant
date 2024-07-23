@@ -399,7 +399,7 @@ def app():
         )
     
     if btn:
-        api_key = openai.api_key
+        # api_key = os.environ["OPENAI_API_KEY"]
         if api_key != "sk-..." and api_key !="" and api_key.startswith("sk-"):
             st.session_state.start_col1.empty()
             st.session_state.start_col2.empty()
