@@ -390,7 +390,7 @@ def app():
         4. **Start course generating**: <font color = 'grey'>Touch "Generate my course!" button in the sidebar, then watch how OmniTutor creates personal-customized course for you.</font>
         5. **Interactive learning**: <font color = 'grey'>Learn the course, and ask OmniTutor any questions related to this course whenever you encountered them.</font>
                                 
-        🎉 Have fun playing with Omnitutor!
+        🎉 Have fun Learning!
                                                                                                                                        
         ''', unsafe_allow_html=True
         )
