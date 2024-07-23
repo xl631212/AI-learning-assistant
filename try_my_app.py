@@ -15,6 +15,7 @@ from collections import Counter
 #import jieba
 #import jieba.analyse
 import nltk
+import os
 
 os.environ["OPENAI_API_KEY"]= st.secrets["OPENAI_API_KEY"]
 openai.api_key = os.environ["OPENAI_API_KEY"]
