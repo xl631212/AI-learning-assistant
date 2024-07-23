@@ -321,7 +321,6 @@ def app():
                 padding-bottom: 10px;
             }
         </style>
-        <div class="footer">Made with 🧡 by Siyuan</div>
     """, unsafe_allow_html=True)
     with st.sidebar:
         api_key = ''
